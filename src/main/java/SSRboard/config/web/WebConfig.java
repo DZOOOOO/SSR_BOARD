@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    // 비로그인 상태일때 접근 가능한 컨트롤러 추가.
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 

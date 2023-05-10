@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -36,4 +38,9 @@ public class MemberService {
         return memberRepository.findByMemberIdAndPassword(dto.getMemberId(), dto.getPassword());
     }
 
+    // 맴버 찾기
+    public Member findMember(String memberId) {
+        if (memberId == null) throw new NullPointerException("맴버가 없습니다.");
+        return memberRepository.findByMemberId(memberId);
+    }
 }

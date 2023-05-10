@@ -6,6 +6,7 @@ import SSRboard.comment.domain.Comment;
 import SSRboard.comment.dto.CommentUpdateDto;
 import SSRboard.comment.repository.CommentRepository;
 import SSRboard.member.domain.Member;
+import SSRboard.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class CommentService {
     private final BoardService boardService;
 
     // 댓글작성
-    public void commentWrite(Long boardId, Member member, String comment) {
+    public Comment commentWrite(Long boardId, Member member, String comment) {
         if (boardId == null || member == null || comment == null)
             throw new IllegalArgumentException("다시 시도해주세요.");
 
@@ -33,12 +34,12 @@ public class CommentService {
                 .board(targetBoard)
                 .build();
 
-        commentRepository.save(newComment);
+        return commentRepository.save(newComment);
     }
 
-    // 작성 댓글 찾기
-    public Comment findComment(Long commentId) {
-        return commentRepository.findById(commentId).orElse(null);
+    // 작성 댓글 찾기(member + id)
+    public Comment findComment(Long commentId, Member member) {
+        return commentRepository.findByIdAndMember(commentId, member);
     }
 
     // 게시글에 작성된 댓글 모두 가져오기

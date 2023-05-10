@@ -83,7 +83,7 @@ public class CommentController {
         Long memberId = writeMember.getId();
 
         // 작성된 댓글
-        Comment comment = commentService.findComment(commentId);
+        Comment comment = commentService.findComment(commentId, writeMember);
 
         if (bindingResult.hasErrors()) {
             log.error("error = {}", bindingResult.getFieldError());
